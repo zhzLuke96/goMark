@@ -1,5 +1,5 @@
 // ![size badge](https://img.shields.io/badge/build-passing-green)
-// > generating markdown documents from .go files.
+// generating markdown documents from .go files.
 //
 // # Overview
 // > Copyright 2019 zhzluke96.  All rights reserved.
@@ -14,13 +14,13 @@ $ go install github.com/zhzLuke96/goMark
 */
 // ```
 // -f string
-// ___parse file name. (default "./main.go")
+//    parse file name. (default "./main.go")
 // -o string
-// ___output markdown file name. (default "./README.md")
+//    output markdown file name. (default "./README.md")
 // -t string
-// ___markdown title. (default "goMark")
+//    markdown title. (default "goMark📑")
 // ```
-// 需要注意, `/*...*/` 和 `//...` 会区别对待，长注释将认为是 golang 示例代码，反之则是正常的文档
+// 需要注意， `/*...*/` 和 `//...` 会区别对待，长注释将认为是 golang 示例代码，反之则是正常的文档
 // # TODO
 // - [ ] 支持更多模式
 // - [ ] 根据类分级
@@ -29,7 +29,7 @@ $ go install github.com/zhzLuke96/goMark
 // # LICENSE
 // GPL-3.0
 //
-// <div style="text-align:center;">👇👇following is automatic content generation👇👇</div>
+// <center>👇👇following is automatic content generation👇👇</center>
 //
 
 package main
@@ -47,7 +47,7 @@ import (
 
 var filePth = flag.String("f", "./main.go", "parse file name.")
 var output = flag.String("o", "./README.md", "output markdown file name.")
-var title = flag.String("t", "goMark", "markdown title.")
+var title = flag.String("t", "goMark📑", "markdown title.")
 
 func init() {
 	flag.Parse()
@@ -111,12 +111,23 @@ func loadFile(filename string) ([]byte, error) {
 	return data, nil
 }
 
+func trimSpace(s string) string {
+	s = strings.Trim(s, "\n")
+	if len(s) == 0 {
+		return s
+	}
+	if s[:1] == " " {
+		return s[1:]
+	}
+	return s
+}
+
 func markDoc(ds []*ast.Comment) string {
 	ret := ""
 	for _, v := range ds {
 		if strings.HasPrefix(v.Text, "//") {
 			d := strings.TrimPrefix(v.Text, "//")
-			d = strings.TrimSpace(d)
+			d = trimSpace(d)
 			ret += d
 			if !strings.HasSuffix(ret, "<br>\n") && !strings.HasSuffix(d, "```") {
 				ret += "<br>\n"
@@ -127,7 +138,7 @@ func markDoc(ds []*ast.Comment) string {
 		if strings.HasPrefix(v.Text, "/*") && strings.HasSuffix(v.Text, "*/") {
 			d := strings.TrimPrefix(v.Text, "/*")
 			d = strings.TrimSuffix(d, "*/")
-			d = strings.TrimSpace(d)
+			d = trimSpace(d)
 			ret += "\n```golang\n" + d + "\n```\n"
 		}
 	}

@@ -1,6 +1,6 @@
-# goMark
+# goMark📑
 ![size badge](https://img.shields.io/badge/build-passing-green)<br>
-> generating markdown documents from .go files.<br>
+generating markdown documents from .go files.<br>
 
 # Overview<br>
 > Copyright 2019 zhzluke96.  All rights reserved.<br>
@@ -16,13 +16,13 @@ $ go install github.com/zhzLuke96/goMark
 ```
 ```
 -f string<br>
-___parse file name. (default "./main.go")<br>
+   parse file name. (default "./main.go")<br>
 -o string<br>
-___output markdown file name. (default "./README.md")<br>
+   output markdown file name. (default "./README.md")<br>
 -t string<br>
-___markdown title. (default "goMark")<br>
+   markdown title. (default "goMark📑")<br>
 ```
-需要注意, `/*...*/` 和 `//...` 会区别对待，长注释将认为是 golang 示例代码，反之则是正常的文档<br>
+需要注意， `/*...*/` 和 `//...` 会区别对待，长注释将认为是 golang 示例代码，反之则是正常的文档<br>
 # TODO<br>
 - [ ] 支持更多模式<br>
 - [ ] 根据类分级<br>
@@ -31,7 +31,7 @@ ___markdown title. (default "goMark")<br>
 # LICENSE<br>
 GPL-3.0<br>
 
-<div style="text-align:center;">👇👇following is automatic content generation👇👇</div><br>
+<center>👇👇following is automatic content generation👇👇</center><br>
 
 # Index
 
